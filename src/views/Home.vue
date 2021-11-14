@@ -1,18 +1,62 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <!-- <Navbar :loggedIn="loggedIn" /> -->
+    <Navbar2 :loggedIn="loggedIn" />
+    <v-main class="white">
+      <v-container id="scrolling-techniques-7">
+        <v-row>
+          <v-col cols="12" md="3" class="hidden-sm-and-down">
+            <HomeSidebar />
+          </v-col>
+          <v-col cols="12" md="9" class="hero_section">
+            <HeroSection />
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+    <!-- Top Categories Sections -->
+    <CategorySection />
+
+    <!-- Product Section -->
+    <ProductSection />
+    <!-- Bottom Navigation -->
+    <BottomNavigation class="hidden-sm-and-up" />
+    <!-- </v-main> -->
+  </v-app>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Navbar2 from "../components/Navbar/Navbar2.vue";
+import HeroSection from "../components/HomePage/HeroSection.vue";
+import HomeSidebar from "../components/HomePage/HomeSidebar.vue";
+import CategorySection from "../components/HomePage/CategorySection.vue";
+import BottomNavigation from "../components/HomePage/BottomNavigation.vue";
+import ProductSection from "../components/HomePage/ProductSection.vue";
+
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'Home',
+  name: "Home",
+  data: () => ({
+    links: ["Dashboard", "Messages", "Profile", "Updates"],
+  }),
+  title: "Home - My Shop",
   components: {
-    HelloWorld
-  }
-}
+    // Navbar,
+    Navbar2,
+    HeroSection,
+    HomeSidebar,
+    CategorySection,
+    BottomNavigation,
+    ProductSection,
+  },
+  computed: {
+    ...mapGetters("auth", {
+      loggedIn: "loginState",
+    }),
+  },
+};
 </script>
+
+<style>
+</style>
