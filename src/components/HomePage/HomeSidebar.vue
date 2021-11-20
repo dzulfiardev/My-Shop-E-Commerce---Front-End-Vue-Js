@@ -2,7 +2,7 @@
   <v-sheet rounded="lg" elevation="3" height="100%">
     <v-list rounded>
       <v-list-item-group v-model="selectedItem" color="blue">
-        <v-list-item v-for="(item, i) in items" :key="i">
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.link">
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
@@ -20,12 +20,17 @@ export default {
   data: () => ({
     selectedItem: 1,
     items: [
-      { text: "Laptop", icon: "mdi-laptop" },
-      { text: "Smartphone", icon: "mdi-cellphone-text" },
-      { text: "Monitor", icon: "mdi-television-guide" },
-      { text: "Peripheral", icon: "mdi-memory" },
-      { text: "Smartwatch", icon: "mdi-watch-variant" },
-      { text: "TV", icon: "mdi-television-box" },
+      { text: "Laptop", icon: "mdi-laptop", link: "/category/laptop" },
+      {
+        text: "Smartphone",
+        icon: "mdi-cellphone-text",
+        link: "/category/smartphone",
+      },
+      {
+        text: "Smartwatch",
+        icon: "mdi-watch-variant",
+        link: "/category/smartwatch",
+      },
     ],
   }),
 };
