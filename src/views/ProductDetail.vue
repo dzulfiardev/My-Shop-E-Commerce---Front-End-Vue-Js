@@ -111,7 +111,10 @@
               </v-row>
 
               <!-- Related product -->
-              <RelatedProduct @loadDetailProduct="loadDetailProduct" />
+              <RelatedProduct
+                @loadDetailProduct="loadDetailProduct"
+                :getRelatedProduct="getRelatedProduct"
+              />
             </v-container>
           </v-col>
         </v-row>
@@ -147,6 +150,7 @@ export default {
       productQty: 0,
       cartQty: 1,
       cart: [],
+      getRelatedProduct: "",
     };
   },
   methods: {
@@ -178,14 +182,27 @@ export default {
       this.$api
         .get("/detail-product/" + this.$route.params.product_slug)
         .then((res) => {
+          console.log(res);
           this.product = res.data;
           this.productQty = res.data.product_quantity;
           this.content = res.data.product_content;
+          this.relatedProductByCategory(res.data.category_id, res.data.id);
         })
         .catch((err) => {
           console.log(err.response.data);
         });
       window.scroll(0, 0);
+    },
+    relatedProductByCategory(categoryId, currentProductId) {
+      this.$api
+        .get("/related-product/" + categoryId + "/" + currentProductId)
+        .then((res) => {
+          console.log(res);
+          this.getRelatedProduct = res.data;
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
     },
   },
   mounted() {

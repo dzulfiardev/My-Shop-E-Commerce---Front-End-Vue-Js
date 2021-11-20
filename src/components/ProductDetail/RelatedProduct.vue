@@ -4,14 +4,21 @@
     <v-sheet class="mx-auto mt-5">
       <v-slide-group multiple show-arrows>
         <v-slide-item
-          v-for="product in products"
+          v-for="product in getRelatedProduct"
           :key="product.id"
           class="py-5"
         >
-          <v-card class="mx-3" width="250">
-            <router-link :to="'/product-detail/' + product.product_slug">
-              <v-img :src="product.product_image_url" height="200px"></v-img>
-            </router-link>
+          <v-card
+            class="mx-3 my-2"
+            width="250"
+            style="height: fit-content !important"
+          >
+            <v-img
+              :src="product.product_image_url"
+              height="200px"
+              style="cursor: pointer"
+              @click="getProduct(product.product_slug)"
+            ></v-img>
             <v-card-title
               class="product_title"
               style="line-height: 1 !important"
@@ -62,21 +69,20 @@ export default {
       model: null,
     };
   },
+  props: ["getRelatedProduct"],
   computed: {
     ...mapGetters("product", {
       products: "getProductGuest",
     }),
   },
   mounted() {
+    this.$emit("loadDetailProduct");
     this.$store.dispatch("product/allProductGuest");
   },
   methods: {
     getProduct(slug) {
-      console.log(slug);
-      this.$router.push("/");
-      setTimeout(() => {
-        this.$router.push("/product-detail/" + slug);
-      }, 500);
+      this.$router.push("/product-detail/" + slug);
+      this.$emit("loadDetailProduct");
     },
   },
 };
