@@ -19,8 +19,13 @@
 
     <!-- Product Section -->
     <ProductSection />
+
     <!-- Bottom Navigation -->
-    <BottomNavigation class="hidden-sm-and-up" />
+    <BottomNavigation class="hidden-sm-and-up" :loggedIn="loggedIn" />
+
+    <!-- Footer Section -->
+    <Footer />
+
     <!-- </v-main> -->
   </v-app>
 </template>
@@ -32,6 +37,7 @@ import HomeSidebar from "../components/HomePage/HomeSidebar.vue";
 import CategorySection from "../components/HomePage/CategorySection.vue";
 import BottomNavigation from "../components/HomePage/BottomNavigation.vue";
 import ProductSection from "../components/HomePage/ProductSection.vue";
+import Footer from "../components/Footer/Footer.vue";
 
 import { mapGetters } from "vuex";
 
@@ -49,6 +55,7 @@ export default {
     CategorySection,
     BottomNavigation,
     ProductSection,
+    Footer,
   },
   computed: {
     ...mapGetters("auth", {
