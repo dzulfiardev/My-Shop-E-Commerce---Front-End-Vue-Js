@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import ProductDetail from "../views/ProductDetail.vue";
 import Category from "../views/Category.vue";
+import SearchPage from "../views/SearchPage.vue";
 import CheckOut from "../views/CheckOut.vue";
 import Login from "../views/Auth/Login.vue";
 import Register from "../views/Auth/Register.vue";
@@ -21,7 +22,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/category/:product_category",
+    path: "/category/:category_slug",
     name: "Category",
     component: Category,
   },
@@ -29,6 +30,11 @@ const routes = [
     path: "/product-detail/:product_slug",
     name: "ProductDetail",
     component: ProductDetail,
+  },
+  {
+    path: "/search/:keyword",
+    name: "SearchPage",
+    component: SearchPage,
   },
   {
     path: "/checkout",

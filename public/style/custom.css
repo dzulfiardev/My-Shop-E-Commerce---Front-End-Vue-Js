@@ -1,0 +1,13 @@
+.fw_400 {
+  font-weight: 400;
+}
+.fw_300 {
+  font-weight: 300;
+}
+.open_sans {
+  font-family: "Open Sans";
+}
+.sm_link {
+  text-decoration: none; 
+  font-size: 13px;
+}

@@ -56,7 +56,11 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block color="primary" class="text-capitalize mt-2"
+          <v-btn
+            block
+            color="primary"
+            class="text-capitalize mt-2"
+            to="/checkout"
             >Checkout Now (${{ totalPrice }})</v-btn
           >
           <v-btn block dark class="text-capitalize mt-2" @click="emptyCart()">

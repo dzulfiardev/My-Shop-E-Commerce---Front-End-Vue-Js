@@ -11,7 +11,7 @@
           <v-card
             class="mx-3 my-2"
             width="250"
-            style="height: fit-content !important"
+            style="height: fit-content !important; padding-bottom: 0 !important"
           >
             <v-img
               :src="product.product_image_url"
@@ -21,26 +21,26 @@
             ></v-img>
             <v-card-title
               class="product_title"
-              style="line-height: 1 !important"
+              style="line-height: 1 !important; font-size: 16px !important"
             >
               {{ product.product_name }}
             </v-card-title>
 
-            <v-container class="d-flex" style="margin-top: -20px !important">
+            <v-container class="d-flex" style="margin-top: -25px !important">
               <v-rating
                 :value="4.5"
                 color="amber"
                 dense
                 half-increments
                 readonly
-                size="16"
+                size="15"
               ></v-rating>
-              <div class="grey--text ms-4 mt-1" style="font-size: 15px">
+              <div class="grey--text ms-4 mt-1" style="font-size: 14px">
                 4.5 (413)
               </div>
             </v-container>
 
-            <div class="d-flex" style="margin-top: -10px">
+            <div class="d-flex" style="margin-top: -20px">
               <v-card-subtitle class="price_title"
                 >${{ product.product_price }}
               </v-card-subtitle>

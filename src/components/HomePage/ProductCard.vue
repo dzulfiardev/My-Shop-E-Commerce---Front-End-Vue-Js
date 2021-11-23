@@ -7,16 +7,20 @@
           class="mx-auto"
           :elevation="hover ? 16 : 3"
           max-width="344"
+          style="padding-bottom: 0 !important"
         >
           <router-link :to="'/product-detail/' + product.product_slug">
             <v-img :src="product.product_image_url" height="200px"></v-img>
           </router-link>
 
-          <v-card-title class="product_title" style="line-height: 1 !important">
+          <v-card-title
+            class="product_title"
+            style="line-height: 1 !important; font-size: 15px !important"
+          >
             {{ product.product_name }}
           </v-card-title>
 
-          <v-container class="d-flex" style="margin-top: -20px !important">
+          <v-container class="d-flex" style="margin-top: -25px !important">
             <v-rating
               :value="4.5"
               color="amber"
@@ -30,7 +34,7 @@
             </div>
           </v-container>
 
-          <div class="d-flex" style="margin-top: -10px">
+          <div class="d-flex" style="margin-top: -18px">
             <v-card-subtitle class="price_title"
               >${{ product.product_price }}
             </v-card-subtitle>

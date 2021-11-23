@@ -1,7 +1,7 @@
 <template>
   <v-row dense class="mt-5">
     <v-col v-for="card in cards" :key="card.title" :cols="card.flex">
-      <v-card>
+      <v-card :to="card.link">
         <v-img
           :src="card.src"
           class="white--text align-end"
@@ -23,16 +23,19 @@ export default {
         title: "Laptop",
         src: require("../../assets/image/Product/Laptop.jpg"),
         flex: 12,
+        link: "category/laptop",
       },
       {
         title: "Smartphone",
         src: require("../../assets/image/Product/Smartphone.jpg"),
         flex: 6,
+        link: "category/smartphone",
       },
       {
         title: "Smart Watch",
         src: require("../../assets/image/Product/Smartwatch.jpg"),
         flex: 6,
+        link: "category/smartwatch",
       },
     ],
   }),

@@ -1,8 +1,14 @@
 <template>
-  <v-sheet rounded="lg" elevation="3" height="100%">
+  <v-sheet rounded="lg" elevation="3" height="400">
+    <v-subheader>Categories</v-subheader>
     <v-list rounded>
       <v-list-item-group v-model="selectedItem" color="blue">
-        <v-list-item v-for="(item, i) in items" :key="i" :to="item.link">
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.link"
+          @click="$emit('loadCategoryProduct')"
+        >
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
@@ -20,6 +26,11 @@ export default {
   data: () => ({
     selectedItem: 1,
     items: [
+      {
+        text: "All Products",
+        icon: "mdi-devices",
+        link: "/category/all-products",
+      },
       { text: "Laptop", icon: "mdi-laptop", link: "/category/laptop" },
       {
         text: "Smartphone",
@@ -33,6 +44,14 @@ export default {
       },
     ],
   }),
+  // methods: {
+  //   getCategoryProduct() {
+  //     this.$store.dispatch(
+  //       "product/categoryProduct",
+  //       this.$route.params.category_slug
+  //     );
+  //   },
+  // },
 };
 </script>
 

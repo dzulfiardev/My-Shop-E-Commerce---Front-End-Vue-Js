@@ -111,7 +111,9 @@
               </v-row>
 
               <!-- Related product -->
+              <SkeletonLoader v-if="relatedProductLoader" :loop="4" />
               <RelatedProduct
+                v-else
                 @loadDetailProduct="loadDetailProduct"
                 :getRelatedProduct="getRelatedProduct"
               />
@@ -132,6 +134,7 @@ import Footer from "../components/Footer/Footer.vue";
 import BottomNavigation from "../components/HomePage/BottomNavigation.vue";
 import { mapGetters } from "vuex";
 import Swal from "sweetalert2";
+import SkeletonLoader from "../components/Loader/SkeletonLoader.vue";
 
 export default {
   title: "My Shop | Product Detail",
@@ -140,6 +143,7 @@ export default {
     Footer,
     BottomNavigation,
     RelatedProduct,
+    SkeletonLoader,
   },
   data() {
     return {
@@ -151,6 +155,7 @@ export default {
       cartQty: 1,
       cart: [],
       getRelatedProduct: "",
+      relatedProductLoader: true,
     };
   },
   methods: {
@@ -182,11 +187,11 @@ export default {
       this.$api
         .get("/detail-product/" + this.$route.params.product_slug)
         .then((res) => {
-          console.log(res);
           this.product = res.data;
           this.productQty = res.data.product_quantity;
           this.content = res.data.product_content;
           this.relatedProductByCategory(res.data.category_id, res.data.id);
+          this.relatedProductLoader = false;
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -197,7 +202,6 @@ export default {
       this.$api
         .get("/related-product/" + categoryId + "/" + currentProductId)
         .then((res) => {
-          console.log(res);
           this.getRelatedProduct = res.data;
         })
         .catch((err) => {

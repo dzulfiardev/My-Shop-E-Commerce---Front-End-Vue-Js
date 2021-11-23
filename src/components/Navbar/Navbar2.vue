@@ -25,30 +25,34 @@
           </v-col>
 
           <v-col cols="10" md="6">
-            <div class="d-flex search_box">
-              <v-spacer></v-spacer>
-              <v-text-field
-                block
-                append-icon="mdi-magnify"
-                label="Searching for"
-                solo
-                outlined
-                dense
-                tile
-                fixed
-                class="search_bar"
-                align="center"
-                style="width: 100%"
-              ></v-text-field>
-              <v-btn
-                dark
-                color="primary"
-                class="search_button text-capitalize"
-                tile
-              >
-                Search
-              </v-btn>
-            </div>
+            <v-form @submit.prevent="submitSearch">
+              <div class="d-flex search_box">
+                <v-spacer></v-spacer>
+                <v-text-field
+                  block
+                  append-icon="mdi-magnify"
+                  label="Searching for"
+                  solo
+                  outlined
+                  dense
+                  tile
+                  fixed
+                  class="search_bar"
+                  align="center"
+                  style="width: 100%"
+                  v-model="searchKeyword"
+                ></v-text-field>
+                <v-btn
+                  dark
+                  color="primary"
+                  class="search_button text-capitalize"
+                  tile
+                  @click="submitSearch"
+                >
+                  Search
+                </v-btn>
+              </div>
+            </v-form>
           </v-col>
 
           <v-col md="3" class="hidden-sm-and-down" align="center">
@@ -135,7 +139,11 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block color="primary" class="text-capitalize mt-2"
+          <v-btn
+            block
+            color="primary"
+            class="text-capitalize mt-2"
+            to="/checkout"
             >Checkout Now (${{ totalPrice }})</v-btn
           >
           <v-btn block dark class="text-capitalize mt-2" @click="emptyCart()">
@@ -160,12 +168,17 @@ export default {
   data: () => ({
     links: ["Login/Register"],
     drawer: null,
+    searchKeyword: "",
   }),
   computed: {
     ...mapGetters("cart", {
       cartCount: "getCartItemsCount",
       cartItems: "getCartItems",
       totalPrice: "getTotalPrice",
+    }),
+    ...mapGetters("product", {
+      productResult: "getWebSearch",
+      autoComplete: "getAutoComplete",
     }),
   },
   methods: {
@@ -177,6 +190,17 @@ export default {
     },
     closeDrawer() {
       this.drawer = false;
+    },
+    submitSearch() {
+      if (this.searchKeyword === "") {
+        this.$router.push("/");
+      } else {
+        this.$store.dispatch("product/webSearch", this.searchKeyword);
+        this.$router.push("/search/" + this.searchKeyword);
+      }
+    },
+    webSearch() {
+      this.$store.dispatch("product/autoComplete", this.searchKeyword);
     },
   },
 };

@@ -1,21 +1,13 @@
 <template>
   <div>
-    <div class="d-flex">
-      <h1 class="text-capitalize">{{ categoryHeading }}</h1>
-      <!-- <v-progress-circular
-        indeterminate
-        color="primary"
-        class="mt-2 ml-2"
-        v-if="headingProgress"
-      ></v-progress-circular> -->
-    </div>
-    <v-row class="mt-2">
-      <v-col
-        cols="6"
-        md="3"
-        v-for="product in categoryProduct"
-        :key="product.id"
-      >
+    <h1 v-if="webSearch.length == 0">
+      Search result for: {{ this.$route.params.keyword }}
+      <span>Not found!</span>
+    </h1>
+    <h1 v-else>Search result for: {{ this.$route.params.keyword }}</h1>
+    <SkeletonLoader v-if="webSearchLoader" :loop="8" />
+    <v-row v-else class="mt-2">
+      <v-col cols="6" md="3" v-for="product in webSearch" :key="product.id">
         <v-hover v-slot="{ hover }">
           <v-card
             :class="{ 'on-hover': hover }"
@@ -69,15 +61,18 @@
 </template>
 
 <script>
+import SkeletonLoader from "../Loader/SkeletonLoader.vue";
 export default {
-  props: [
-    "categoryProduct",
-    "skeletonLoader",
-    "categoryHeading",
-    "headingProgress",
-  ],
+  props: ["webSearch", "webSearchLoader"],
+  components: {
+    SkeletonLoader,
+  },
   data() {
-    return {};
+    return {
+      resultTitle: "Search result for: " + this.$route.params.keyword,
+      notFoundTitle:
+        "Search result for: " + this.$route.params.keyword + " Not found!",
+    };
   },
 };
 </script>

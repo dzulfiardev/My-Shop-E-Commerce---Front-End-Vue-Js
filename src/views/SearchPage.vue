@@ -8,14 +8,9 @@
             <HomeSidebar @loadCategoryProduct="loadCategoryProduct" />
           </v-col>
           <v-col cols="12" md="9" class="categories_section">
-            <SkeletonLoader v-if="categoryProductLoader" :loop="8" />
-            <ProductByCategory
-              v-else
-              :categoryProduct="categoryProduct"
-              :headingProgress="headingProgress"
-              :skeletonLoader="skeletonLoader"
-              :categoryHeading="categoryHeading"
-              @loadingFalse="loadingFalse"
+            <SearchResult
+              :webSearch="webSearch"
+              :webSearchLoader="webSearchLoader"
             />
           </v-col>
         </v-row>
@@ -33,43 +28,30 @@
 <script>
 import Navbar2 from "../components/Navbar/Navbar2.vue";
 import HomeSidebar from "../components/HomePage/HomeSidebar.vue";
-import ProductByCategory from "../components/Category/ProductByCategory.vue";
+import SearchResult from "../components/Search/SearchResult.vue";
 import BottomNavigation from "../components/HomePage/BottomNavigation.vue";
 import Footer from "../components/Footer/Footer.vue";
-import SkeletonLoader from "../components/Loader/SkeletonLoader.vue";
 
 import { mapGetters } from "vuex";
 
 export default {
-  title: "Category - My Shop",
   components: {
     Navbar2,
     HomeSidebar,
-    ProductByCategory,
+    SearchResult,
     BottomNavigation,
     Footer,
-    SkeletonLoader,
-  },
-  data() {
-    return {
-      skeletonLoader: true,
-      categoryHeading: "",
-      headingProgress: true,
-    };
   },
   computed: {
     ...mapGetters("auth", {
       loggedIn: "loginState",
     }),
     ...mapGetters("product", {
-      categoryProduct: "getCategoryProduct",
-      categoryProductLoader: "getCategoryProductLoader",
+      webSearch: "getWebSearch",
+      webSearchLoader: "getWebSearchLoader",
     }),
   },
   methods: {
-    loadingFalse() {
-      this.skeletonLoader = false;
-    },
     loadCategoryProduct() {
       this.headingProgress = true;
       const params = this.$route.params.category_slug;
@@ -79,9 +61,6 @@ export default {
         this.categoryHeading = params;
       }
     },
-  },
-  mounted() {
-    this.loadCategoryProduct();
   },
 };
 </script>
