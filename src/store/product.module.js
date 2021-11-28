@@ -5,34 +5,12 @@ export const product = {
   state: {
     category: "",
     allProductGuest: "",
+    allProductGuestLoader: "",
     categoryProduct: {},
     categoryProductLoader: "",
     webSearch: {},
     webSearchLoader: "",
     autoComplete: [],
-  },
-  getters: {
-    getCategory(state) {
-      return state.category;
-    },
-    getProductGuest(state) {
-      return state.allProductGuest;
-    },
-    getCategoryProduct(state) {
-      return state.categoryProduct;
-    },
-    getCategoryProductLoader(state) {
-      return state.categoryProductLoader;
-    },
-    getWebSearch(state) {
-      return state.webSearch;
-    },
-    getWebSearchLoader(state) {
-      return state.webSearchLoader;
-    },
-    getAutoComplete(state) {
-      return state.autoComplete;
-    },
   },
   actions: {
     category({ commit }) {
@@ -46,11 +24,14 @@ export const product = {
         });
     },
     allProductGuest({ commit }) {
+      let loader = true;
+      commit("allProductGuest", loader);
       api
         .get("/all-product")
         .then((res) => {
-          console.log(res);
+          loader = false;
           commit("allProductGuest", res.data);
+          commit("allProductGuestLoader", loader);
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -115,6 +96,9 @@ export const product = {
     allProductGuest(state, data) {
       state.allProductGuest = data;
     },
+    allProductGuestLoader(state, data) {
+      state.allProductGuestLoader = data;
+    },
     categoryProduct(state, data) {
       state.categoryProduct = data;
     },
@@ -129,6 +113,32 @@ export const product = {
     },
     autoComplete(state, data) {
       state.autoComplete = data;
+    },
+  },
+  getters: {
+    getCategory(state) {
+      return state.category;
+    },
+    getProductGuest(state) {
+      return state.allProductGuest;
+    },
+    getProductGuestLoader(state) {
+      return state.allProductGuestLoader;
+    },
+    getCategoryProduct(state) {
+      return state.categoryProduct;
+    },
+    getCategoryProductLoader(state) {
+      return state.categoryProductLoader;
+    },
+    getWebSearch(state) {
+      return state.webSearch;
+    },
+    getWebSearchLoader(state) {
+      return state.webSearchLoader;
+    },
+    getAutoComplete(state) {
+      return state.autoComplete;
     },
   },
 };

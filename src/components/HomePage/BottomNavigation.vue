@@ -17,11 +17,11 @@
       </div>
 
       <div>
-        <v-btn to="/login" v-if="!loggedIn">
+        <!-- <v-btn to="/login" v-if="!loggedIn">
           <span>Account</span>
           <v-icon>mdi-account</v-icon>
-        </v-btn>
-        <v-btn to="/dashboard" v-else>
+        </v-btn> -->
+        <v-btn to="/dashboard" v-if="loggedIn">
           <span>Dashboard</span>
           <v-icon>mdi-view-dashboard</v-icon>
         </v-btn>

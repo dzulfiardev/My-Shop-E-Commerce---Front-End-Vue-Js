@@ -121,7 +121,7 @@ export default {
 
           localStorage.setItem("loggedIn", JSON.stringify(res.data));
           this.$store.dispatch("auth/login", res.data.user);
-          this.$router.push("/");
+          this.$router.push("/dashboard");
         })
         .catch((err) => {
           console.log(err.response);

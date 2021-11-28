@@ -17,8 +17,10 @@
       </v-card>
 
       <v-list>
-        <v-list-item>
-          <v-list-item-avatar>
+        <v-list-item style="margin-bottom: -15px">
+          <v-list-item-avatar
+            style="width: 70px !important; height: 70px !important"
+          >
             <v-img :src="session.imageUrl"></v-img>
           </v-list-item-avatar>
         </v-list-item>

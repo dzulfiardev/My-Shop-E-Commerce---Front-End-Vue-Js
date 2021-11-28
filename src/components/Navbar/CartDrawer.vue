@@ -65,15 +65,15 @@
                 class="mx-2"
                 fab
                 dark
-                small
                 color="red"
                 outlined
                 align="left"
                 v-bind="attrs"
                 v-on="on"
+                style="width: 25px; height: 25px"
                 @click="$emit('removeItemCart', index)"
               >
-                <v-icon dark> mdi-close-thick </v-icon>
+                <v-icon dark style="font-size: 14px"> mdi-close-thick </v-icon>
               </v-btn>
             </template>
             <span>Remove {{ item.name }}</span>

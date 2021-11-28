@@ -7,8 +7,20 @@
         <v-card class="mt-5">
           <v-card-title>
             <v-row>
-              <v-col cols="12" md="8"></v-col>
-              <v-col cols="12" md="4">
+              <v-col cols="12" md="3">
+                <v-select
+                  label="Category"
+                  :items="categorySelect"
+                  item-value="value"
+                  item-text="text"
+                  dense
+                  outlined
+                  v-model="categorySelectBox"
+                  @change="findByCategory(categorySelectBox)"
+                ></v-select>
+              </v-col>
+              <v-col cols="12" md="6"></v-col>
+              <v-col cols="12" md="3">
                 <v-text-field
                   v-model="table.search"
                   append-icon="mdi-magnify"
@@ -65,15 +77,36 @@
 
             <!-- Action Button -->
             <template v-slot:[`item.action`]="{ item }">
-              <v-icon class="mr-2" @click="editItem(item, item.id)">
-                mdi-pencil
-              </v-icon>
-              <v-icon
-                color="red"
-                @click="deleteItem(item.id, item.product, item.uid)"
-              >
-                mdi-delete
-              </v-icon>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon
+                    class="mr-2"
+                    v-bind="attrs"
+                    v-on="on"
+                    @click="editItem(item, item.id)"
+                  >
+                    mdi-pencil
+                  </v-icon>
+                </template>
+                <span>Edit {{ item.product }}</span>
+              </v-tooltip>
+
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon
+                    v-if="
+                      session.role == 'superadmin' || session.role == 'admin'
+                    "
+                    v-on="on"
+                    v-bind="attrs"
+                    color="red"
+                    @click="deleteItem(item.id, item.product, item.uid)"
+                  >
+                    mdi-delete
+                  </v-icon>
+                </template>
+                <span>Delete {{ item.product }}</span>
+              </v-tooltip>
             </template>
             <!-- End Action Button -->
           </v-data-table>
@@ -95,6 +128,7 @@
 <script>
 import Navigation from "../../components/Main/Navigation.vue";
 import AddProductDialog from "../../components/Main/Products/AddProductDialog.vue";
+import { mapGetters } from "vuex";
 import Swal from "sweetalert2";
 
 export default {
@@ -103,6 +137,8 @@ export default {
     return {
       addDialog: false,
       productId: 0,
+      categorySelectBox: "",
+      productData: [],
       tableHead: [
         {
           text: "#",
@@ -180,6 +216,17 @@ export default {
     Navigation,
     AddProductDialog,
   },
+  computed: {
+    ...mapGetters("auth", {
+      session: "getUser",
+    }),
+    ...mapGetters("product", {
+      categories: "getCategoryProduct",
+    }),
+    ...mapGetters("productManage", {
+      categorySelect: "getCategories",
+    }),
+  },
   methods: {
     dialog() {
       this.addDialog = true;
@@ -203,10 +250,10 @@ export default {
       this.$restrictApi
         .get("/products")
         .then((res) => {
-          console.log(res);
-          this.table.product = res.data.map((data) => {
+          this.productData = res.data.map((data) => {
             return {
               id: data.id,
+              categoryId: data.category_id,
               uid: data.product_uid,
               image: data.product_image_url,
               product: data.product_name,
@@ -215,12 +262,21 @@ export default {
               category: data.category_name,
             };
           });
-          console.log(this.table.product);
+          this.table.product = this.productData;
           this.table.loading = false;
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+    findByCategory(id) {
+      const product = this.productData;
+      if (id == "all") {
+        return (this.table.product = product);
+      }
+      this.table.product = product.filter((data) => {
+        return data.categoryId === id;
+      });
     },
     getStatus(status) {
       if (status == "Active") return "green";
@@ -233,7 +289,6 @@ export default {
       this.$restrictApi
         .get(`/product/${id}`)
         .then((res) => {
-          console.log(res);
           this.addDialog = true;
           this.table.loading = false;
 
@@ -297,6 +352,7 @@ export default {
   },
   mounted() {
     this.showDataTable();
+    this.$store.dispatch("productManage/categories");
   },
 };
 </script>

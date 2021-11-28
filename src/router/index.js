@@ -5,6 +5,7 @@ import ProductDetail from "../views/ProductDetail.vue";
 import Category from "../views/Category.vue";
 import SearchPage from "../views/SearchPage.vue";
 import CheckOut from "../views/CheckOut.vue";
+import Summary from "../views/Summary.vue";
 import Login from "../views/Auth/Login.vue";
 import Register from "../views/Auth/Register.vue";
 import Dashboard from "../views/Main/Dashboard.vue";
@@ -40,6 +41,11 @@ const routes = [
     path: "/checkout",
     name: "CheckOut",
     component: CheckOut,
+  },
+  {
+    path: "/summary",
+    name: "Summary",
+    component: Summary,
   },
   {
     path: "/login",
@@ -101,6 +107,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   let loggedIn = localStorage.getItem("loggedIn");
+
   if (to.name === "Login" && loggedIn) {
     next({ name: "Dashboard" });
   } else if (to.matched.some((record) => record.meta.requiresAuth)) {

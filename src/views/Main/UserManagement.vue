@@ -223,12 +223,36 @@
 
             <!-- Action Button -->
             <template v-slot:[`item.action`]="{ item }">
-              <v-icon class="mr-2" @click="editItem(item, item.id)">
-                mdi-pencil
-              </v-icon>
-              <v-icon color="red" @click="deleteItem(item.id)">
-                mdi-delete
-              </v-icon>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon
+                    v-bind="attrs"
+                    v-on="on"
+                    class="mr-2"
+                    @click="editItem(item, item.id)"
+                  >
+                    mdi-pencil
+                  </v-icon>
+                </template>
+                <span>Edit {{ item.fullname }}</span>
+              </v-tooltip>
+
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon
+                    v-if="
+                      session.role == 'superadmin' || session.role == 'admin'
+                    "
+                    color="red"
+                    v-on="on"
+                    v-bind="attrs"
+                    @click="deleteItem(item.id)"
+                  >
+                    mdi-delete
+                  </v-icon>
+                </template>
+                <span>Delete {{ item.fullname }}</span>
+              </v-tooltip>
             </template>
             <!-- End Action Button -->
           </v-data-table>
@@ -240,6 +264,7 @@
 
 <script>
 import Navigation from "../../components/Main/Navigation.vue";
+import { mapGetters } from "vuex";
 import Swal from "sweetalert2";
 
 export default {
@@ -306,6 +331,9 @@ export default {
     imgPreview() {
       return this.image == "" ? this.imagePlaceholder : this.image;
     },
+    ...mapGetters("auth", {
+      session: "getUser",
+    }),
   },
   methods: {
     allUsers() {
