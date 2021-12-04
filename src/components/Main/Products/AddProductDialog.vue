@@ -66,15 +66,25 @@
                 <v-row class="px-5">
                   <v-col cols="6" md="6">
                     <v-subheader><b>Price</b></v-subheader>
-                    <v-text-field
+                    <!-- <v-text-field
                       outlined
                       dense
                       solo
-                      label="$ 0.00"
+                      label="0.00"
                       elevation="0"
+                      prefix="$"
                       :rules="rules.price"
                       v-model="input.price"
-                    ></v-text-field>
+                    ></v-text-field> -->
+                    <v-currency-field
+                      outlined
+                      dense
+                      solo
+                      label="0.00"
+                      prefix="$"
+                      :rules="rules.price"
+                      v-model="input.price"
+                    />
                   </v-col>
                   <v-col cols="6" md="6">
                     <v-subheader><b>Discount</b></v-subheader>

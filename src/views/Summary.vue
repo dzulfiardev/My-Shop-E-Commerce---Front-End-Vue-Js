@@ -11,6 +11,7 @@
 import Navbar from "../components/Navbar/Navbar2.vue";
 
 export default {
+  title: "Summary - My Shop",
   components: {
     Navbar,
   },

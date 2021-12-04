@@ -349,6 +349,10 @@ export default {
         }
       }); // End sweet Alert
     },
+    formatCurrency(price) {
+      price = price / 100;
+      return price.toLocaleString("en-US");
+    },
   },
   mounted() {
     this.showDataTable();

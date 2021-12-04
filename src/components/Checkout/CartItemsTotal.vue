@@ -21,13 +21,13 @@
           </p>
         </div>
         <div style="margin-top: -20px !important">
-          <small>${{ item.price }} x {{ item.quantity }}</small>
+          <small>{{ formatCurrency(item.price) }} x {{ item.quantity }}</small>
         </div>
       </v-col>
       <v-col cols="2">
         <div>
           <p class="red--text" style="font-size: 15px">
-            <b>${{ item.totalPrice }}</b>
+            <b>{{ formatCurrency(item.totalPrice) }}</b>
           </p>
         </div>
       </v-col>
@@ -66,7 +66,7 @@
       <v-col cols="5">
         <p>
           <span class="grey--text darken-3--text">USD </span>
-          <span style="font-size: 25px">${{ total }}.00</span>
+          <span style="font-size: 25px">{{ formatCurrency(totalPrice) }}</span>
         </p>
       </v-col>
     </v-row>
@@ -98,6 +98,12 @@ export default {
       if (this.couponCode != "FKjowfnsaldfnlasflasfj;a") {
         return alert("Wrong coupon code!");
       }
+    },
+    formatCurrency(price) {
+      return price.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
     },
   },
   mounted() {

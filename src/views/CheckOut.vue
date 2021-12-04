@@ -10,7 +10,10 @@
           </router-link>
         </div>
         <v-divider class="hidden-md-and-up"></v-divider>
-        <CartItemsTotalMobile class="hidden-md-and-up px-7 mt-10" />
+        <CartItemsTotalMobile
+          class="hidden-md-and-up px-7 mt-10"
+          @formatCurrency="formatCurrency"
+        />
         <FormCheckout
           :input="input"
           @processPayment="processPayment"
@@ -18,7 +21,10 @@
         />
       </v-col>
       <v-col cols="12" md="5" xl="5" class="grey lighten-4 pt-10">
-        <CartItemsTotal class="hidden-sm-and-down mt-10" />
+        <CartItemsTotal
+          class="hidden-sm-and-down mt-10"
+          @formatCurrency="formatCurrency"
+        />
       </v-col>
     </v-row>
   </v-app>
@@ -61,7 +67,7 @@ export default {
         amount: "",
         cart: "",
       },
-      cartItems: JSON.stringify(localStorage.getItem("cart")),
+      cartItems: JSON.parse(localStorage.getItem("cart")),
       paymentProcessing: false,
     };
   },
@@ -96,11 +102,11 @@ export default {
         alert(error);
       } else {
         this.input.payment_method_id = paymentMethod.id;
-        this.input.amount = this.totalPrice;
+        this.input.amount = this.totalPrice * 100;
         this.input.cart = this.cartItems;
 
         api
-          .post("/purcase", this.input)
+          .post("/purchase", this.input)
           .then((res) => {
             console.log(res);
             this.paymentProcessing = false;
@@ -110,7 +116,8 @@ export default {
           })
           .catch((error) => {
             this.paymentProcessing = false;
-            alert(error.response.data);
+            alert(error.response.data.message);
+            console.log(error.response.data.message);
           });
       }
     },
@@ -125,6 +132,13 @@ export default {
       });
 
       this.cardElement.mount("#cardElement");
+    },
+    formatCurrency(price) {
+      price = price / 100;
+      return price.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
     },
   },
   mounted() {
