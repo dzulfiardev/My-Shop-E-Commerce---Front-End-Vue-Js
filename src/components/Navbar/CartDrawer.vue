@@ -35,7 +35,7 @@
     <!-- Cart Items -->
     <v-container>
       <v-row v-for="(item, index) in cartItems" :key="index">
-        <v-col cols="4">
+        <v-col cols="4" class="pa-3">
           <img
             contain
             :src="item.image"
@@ -43,8 +43,8 @@
             style="height: 70px; width: 100p%"
           />
         </v-col>
-        <v-col cols="6">
-          <div>
+        <v-col cols="6" class="px-2">
+          <div class="font_15">
             <p>
               <b>{{ item.name }}</b>
             </p>
@@ -53,7 +53,7 @@
             <small>${{ item.price }} x {{ item.quantity }}</small>
           </div>
           <div>
-            <p class="red--text">
+            <p class="red--text font_14">
               <b>${{ item.totalPrice }}</b>
             </p>
           </div>
@@ -92,4 +92,10 @@ export default {
 </script>
 
 <style>
+.font_15 {
+  font-size: 15px !important;
+}
+.font_14 {
+  font-size: 14px !important;
+}
 </style>

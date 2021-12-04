@@ -110,8 +110,8 @@ export default {
           .then((res) => {
             console.log(res);
             this.paymentProcessing = false;
-            // this.$store.commit("updateOrder", res.data);
-            // this.$store.dispatch('emptyCart');
+            this.$store.commit("order/updateOrder", res.data);
+            this.$store.dispatch("cart/emptyCart");
             this.$router.push("/summary");
           })
           .catch((error) => {

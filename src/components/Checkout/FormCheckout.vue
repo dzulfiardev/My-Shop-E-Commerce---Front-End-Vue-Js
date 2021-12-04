@@ -134,6 +134,10 @@
         <v-col cols="12">
           <label for="cardElement">Credit / Debit Card</label>
           <div id="cardElement" class="my-3"></div>
+          <small>Testing Card Number: 4242 4242 4242 4242</small><br />
+          <small>Exp date: *any</small><br />
+          <small>CVC: *any</small><br />
+          <small>ZIP: *any</small>
         </v-col>
       </v-row>
       <v-btn

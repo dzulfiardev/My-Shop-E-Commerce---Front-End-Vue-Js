@@ -13,7 +13,7 @@
           <v-col cols="2" md="3">
             <div>
               <router-link to="/">
-                <v-avatar class="mr-10" color="grey darken-1" size="70" tile>
+                <v-avatar class="mr-10" color="grey darken-1" size="60" tile>
                   <img
                     :src="require('../../assets/image/Dzoel shop.png')"
                     alt=""

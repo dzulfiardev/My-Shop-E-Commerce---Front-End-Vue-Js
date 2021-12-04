@@ -95,6 +95,7 @@
                       label="%"
                       elevation="0"
                       v-model="input.discount"
+                      disabled
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -378,6 +379,7 @@ export default {
         .catch((err) => {
           this.dialogOverlay = false;
           console.log(err.response.data);
+          alert(err.response.data.message)
           const error = err.response.data.error;
           if (error) {
             this.$refs.form.validate(true);

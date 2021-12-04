@@ -7,6 +7,7 @@
         <v-row class="mt-5">
           <UserTotalCard />
           <ProductTotalCard />
+          <CustomerTotalCard />
         </v-row>
       </v-container>
     </v-main>
@@ -17,6 +18,7 @@
 import Navigation from "../../components/Main/Navigation.vue";
 import UserTotalCard from "../../components/Main/Dashboard/UserTotalCard.vue";
 import ProductTotalCard from "../../components/Main/Dashboard/ProductTotalCard.vue";
+import CustomerTotalCard from "../../components/Main/Dashboard/CustomerTotalCard.vue";
 
 export default {
   title: "Dashboard - My Shop",
@@ -24,6 +26,18 @@ export default {
     Navigation,
     UserTotalCard,
     ProductTotalCard,
+    CustomerTotalCard,
+  },
+  mounted() {
+    this.$restrictApi
+      .get("/customers")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        alert(err.response.data.message);
+      });
   },
 };
 </script>
