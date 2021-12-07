@@ -34,24 +34,23 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       title: "Customers",
       icon: "mdi-account-cash-outline",
-      count: 0,
     };
+  },
+  computed: {
+    ...mapGetters("auth", {
+      count: "getCustomerCount",
+    }),
   },
   methods: {
     customerCount() {
-      this.$restrictApi
-        .get("/customers")
-        .then((res) => {
-          this.count = res.data.length;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
+      this.$store.dispatch("auth/customerCount");
     },
   },
   mounted() {

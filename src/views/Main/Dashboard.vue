@@ -28,17 +28,6 @@ export default {
     ProductTotalCard,
     CustomerTotalCard,
   },
-  mounted() {
-    this.$restrictApi
-      .get("/customers")
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        alert(err.response.data.message);
-      });
-  },
 };
 </script>
 

@@ -34,24 +34,23 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       title: "Products",
       icon: "mdi-cart-variant",
-      count: 0,
     };
+  },
+  computed: {
+    ...mapGetters("product", {
+      count: "getCount",
+    }),
   },
   methods: {
     productCount() {
-      this.$restrictApi
-        .get("/products")
-        .then((res) => {
-          this.count = res.data.length;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
+      this.$store.dispatch("product/count");
     },
   },
   mounted() {

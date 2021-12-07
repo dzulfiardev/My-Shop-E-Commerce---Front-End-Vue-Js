@@ -114,16 +114,13 @@ export default {
     selectedItem: 0,
     items: [
       { text: "Dashboard", icon: "mdi-view-dashboard", link: "/dashboard" },
-      { text: "Product", icon: "mdi-cart-arrow-down", link: "/product" },
-      { text: "Profile", icon: "mdi-account", link: "/profile" },
+      { text: "Orders", icon: "mdi-cart-arrow-down", link: "/orders" },
+      { text: "Product", icon: "mdi-monitor-cellphone-star", link: "/product" },
     ],
     items2: [
       {
         action: "mdi-cog-outline",
-        items: [
-          { title: "App Settings", link: "/app-settings" },
-          { title: "User Management", link: "/user-management" },
-        ],
+        items: [{ title: "User Management", link: "/user-management" }],
         title: "Settings",
       },
     ],

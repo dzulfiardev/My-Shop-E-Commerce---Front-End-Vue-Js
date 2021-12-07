@@ -13,6 +13,7 @@ import Product from "../views/Main/Product.vue";
 import AppSettings from "../views/Main/AppSettings.vue";
 import Profile from "../views/Main/Profile.vue";
 import UserManagement from "../views/Main/UserManagement.vue";
+import Orders from "../views/Main/Orders.vue";
 
 Vue.use(VueRouter);
 
@@ -64,6 +65,11 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: "/orders",
+    name: "Orders",
+    component: Orders,
   },
   {
     path: "/product",

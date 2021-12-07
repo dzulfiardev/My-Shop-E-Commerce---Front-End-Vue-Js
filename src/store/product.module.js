@@ -1,4 +1,4 @@
-import { api } from "../plugins/axios";
+import { api, restrictApi } from "../plugins/axios";
 
 export const product = {
   namespaced: true,
@@ -11,6 +11,7 @@ export const product = {
     webSearch: {},
     webSearchLoader: "",
     autoComplete: [],
+    count: 0,
   },
   actions: {
     category({ commit }) {
@@ -88,6 +89,16 @@ export const product = {
           }
         });
     },
+    count({ commit }) {
+      restrictApi
+        .get("/products")
+        .then((res) => {
+          commit("count", res.data.length);
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
+    },
   },
   mutations: {
     category(state, data) {
@@ -114,6 +125,9 @@ export const product = {
     autoComplete(state, data) {
       state.autoComplete = data;
     },
+    count(state, data) {
+      state.count = data;
+    },
   },
   getters: {
     getCategory(state) {
@@ -139,6 +153,9 @@ export const product = {
     },
     getAutoComplete(state) {
       return state.autoComplete;
+    },
+    getCount(state) {
+      return state.count;
     },
   },
 };
