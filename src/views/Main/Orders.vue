@@ -37,11 +37,16 @@
           >
             <!-- Transaction ID -->
             <template v-slot:[`item.transactionId`]="{ item }">
-              <a class="green--text" @click="viewItem(item.transactionId)"
-                ><b>{{ item.transactionId }}</b></a
-              >
+              <a class="green--text" @click="editItem(item.id)">
+                <b>{{ item.transactionId }}</b>
+              </a>
             </template>
             <!-- End Transaction id -->
+
+            <!-- Date Format -->
+            <template v-slot:[`item.datetime`]="{ item }">
+              {{ dateFormat(item.datetime) }}
+            </template>
 
             <!-- Status -->
             <template v-slot:[`item.status`]="{ item }">
@@ -64,11 +69,21 @@
                     mdi-pencil
                   </v-icon>
                 </template>
-                <span>Edit</span>
+                <span>Update Order Progress</span>
               </v-tooltip>
             </template>
             <!-- End Action Button -->
           </v-data-table>
+          <OrdersDialog
+            :orderDialog="orderDialog"
+            :orderId="orderId"
+            :orderTransactionId="input.orderTransactionId"
+            :input="input"
+            :rules="rules"
+            @closeDialog="closeDialog"
+            @showOrders="showOrders"
+            :orderDetail="orderDetail"
+          />
         </v-card>
       </v-container>
     </v-main>
@@ -77,12 +92,16 @@
 
 <script>
 import Navigation from "../../components/Main/Navigation.vue";
+import OrdersDialog from "../../components/Orders/OrdersDialog.vue";
 import { mapGetters } from "vuex";
 
 export default {
   title: "Orders - My Shop",
   data() {
     return {
+      orderDialog: false,
+      loadingOverlay: true,
+      orderId: 0,
       table: {
         selected: [],
         search: "",
@@ -103,15 +122,27 @@ export default {
         { text: "Datetime", value: "datetime" },
         { text: "Action", value: "action", sortable: false },
       ],
+      input: {
+        id: 0,
+        orderTransactionId: "",
+        trackingNumber: "",
+        courier: "",
+      },
+      rules: {
+        trackingNumber: [],
+        courier: [],
+      },
     };
   },
   components: {
     Navigation,
+    OrdersDialog,
   },
   computed: {
     ...mapGetters("order", {
       tableLoader: "getTableLoader",
       ordersTable: "getShowOrders",
+      orderDetail: "getOrderDetail",
     }),
   },
   methods: {
@@ -136,25 +167,47 @@ export default {
       }
     },
     editItem(id) {
-      return alert(id);
+      this.orderDialog = !this.orderDialog;
+      this.$store.dispatch("order/orderDetail", id);
+      this.resetValidation();
+      this.orderId = id;
+      this.input.orderTransactionId = "";
+      this.input.trackingNumber = "";
+      this.input.courier = "";
+
+      this.$restrictApi
+        .get("/orders/" + id)
+        .then((res) => {
+          console.log(res.data);
+          this.input.orderTransactionId = res.data.order_transaction_id;
+          this.input.trackingNumber = res.data.order_tracking_no;
+          this.input.courier = res.data.order_courier;
+        })
+        .catch((err) => {
+          console.log(err.resonse.data.message);
+          alert("Unable connect API");
+        });
+    },
+    closeDialog() {
+      this.orderDialog = false;
     },
     viewItem(transactionId) {
       return alert(transactionId);
     },
     dateFormat(dateValue) {
       const months = [
-        "January",
-        "February",
-        "March",
-        "April",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
         "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
       ];
       const d = new Date(dateValue);
       const date = d.getDate();
@@ -168,6 +221,10 @@ export default {
       const sec = d.getUTCSeconds();
       const S = sec <= 9 ? "0" + sec : sec;
       return `${D} ${month} ${year} - ${H}:${M}:${S}`;
+    },
+    resetValidation() {
+      this.rules.trackingNumber = [];
+      this.rules.courier = [];
     },
   },
   mounted() {

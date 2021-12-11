@@ -370,7 +370,6 @@ export default {
       this.$restrictApi
         .post("/products", form)
         .then((res) => {
-          console.log(res);
           this.dialogOverlay = false;
           this.$emit("showDataTable");
           this.closeDialog();
@@ -379,7 +378,7 @@ export default {
         .catch((err) => {
           this.dialogOverlay = false;
           console.log(err.response.data);
-          alert(err.response.data.message)
+          alert(err.response.data.message);
           const error = err.response.data.error;
           if (error) {
             this.$refs.form.validate(true);

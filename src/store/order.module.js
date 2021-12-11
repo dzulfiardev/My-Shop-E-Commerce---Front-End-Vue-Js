@@ -8,8 +8,11 @@ export const order = {
     showOrders: [],
     table: {
       orders: [],
+      detailOrder: [],
+      // singleOrder: {},
     },
     tableLoader: "",
+    errorUpdate: "",
   },
   actions: {
     showOrders({ commit }) {
@@ -26,6 +29,35 @@ export const order = {
           alert(err.response.data.message);
         });
     },
+    orderDetail({ commit }, id) {
+      commit("orderDetail", []);
+      restrictApi
+        .get("/order-detail/" + id)
+        .then((res) => {
+          commit("orderDetail", res.data);
+        })
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
+    },
+    updateOrder({ commit }, payload) {
+      let form = new FormData();
+      form.append("order_id", payload.orderId);
+      form.append("tracking_number", payload.trackingNumber);
+      form.append("courier", payload.courier);
+
+      restrictApi
+        .post("/deliver-order", form)
+        .then((res) => {
+          console.log(res.data);
+          alert(res.data.success);
+        })
+        .catch((err) => {
+          const error = err.response.data.error;
+          commit("errorUpdate", error);
+          console.log(error);
+        });
+    },
   },
   mutations: {
     updateOrder(state, data) {
@@ -37,33 +69,6 @@ export const order = {
     },
     showOrders(state, data) {
       state.showOrders = data.map((res) => {
-        const months = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ];
-        const d = new Date(res.created_at);
-        const date = d.getDate();
-        const D = date <= 9 ? "0" + date : date;
-        const month = months[d.getMonth()];
-        const year = d.getFullYear();
-        const hour = d.getHours();
-        const H = hour <= 9 ? "0" + hour : hour;
-        const min = d.getMinutes();
-        const M = min <= 9 ? "0" + min : min;
-        const sec = d.getUTCSeconds();
-        const S = sec <= 9 ? "0" + sec : sec;
-        const dateTime = `${D} ${month} ${year} - ${H}:${M}:${S}`;
-
         return {
           id: res.id,
           transactionId: res.order_transaction_id,
@@ -71,24 +76,30 @@ export const order = {
           email: res.email,
           customerName: res.user_fullname,
           status: res.order_status,
-          datetime: dateTime,
+          datetime: res.created_at,
         };
       });
     },
+    orderDetail(state, data) {
+      state.table.detailOrder = data;
+    },
+    errorUpdate(state, data) {
+      state.errorUpdate = data;
+    },
     dateFormat(dateValue) {
       const months = [
-        "January",
-        "February",
-        "March",
-        "April",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
         "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec",
       ];
       const d = new Date(dateValue);
       const date = d.getDate();
@@ -120,6 +131,12 @@ export const order = {
     },
     getTableLoader(state) {
       return state.tableLoader;
+    },
+    getOrderDetail(state) {
+      return state.table.detailOrder;
+    },
+    getErrorUpdate(state) {
+      return state.errorUpdate;
     },
   },
 };

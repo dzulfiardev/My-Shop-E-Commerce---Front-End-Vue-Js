@@ -28,7 +28,12 @@
       </div>
 
       <div>
-        <v-badge :content="cartCount" overlap color="red" align="center">
+        <v-badge
+          :content="cartCount.length ? cartCount : '0'"
+          overlap
+          color="red"
+          align="center"
+        >
           <v-btn @click.stop="drawer = !drawer">
             <span>Cart</span>
             <v-icon>mdi-cart-variant</v-icon>
