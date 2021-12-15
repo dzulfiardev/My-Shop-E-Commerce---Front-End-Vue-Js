@@ -54,6 +54,14 @@
             </tbody>
           </template>
         </v-simple-table>
+        <v-btn
+          color="primary"
+          class="mt-3 text-capitalize"
+          align="center"
+          x-large
+          to="/"
+          >Back</v-btn
+        >
       </v-main>
     </v-container>
   </v-app>

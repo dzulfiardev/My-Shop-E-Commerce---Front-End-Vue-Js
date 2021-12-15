@@ -10,10 +10,10 @@
     >
       <v-container class="py-0 fill-height">
         <v-row align="center">
-          <v-col cols="2" md="3">
+          <v-col cols="12" md="3" class="hidden-sm-and-down">
             <div>
               <router-link to="/">
-                <v-avatar class="mr-10" color="grey darken-1" size="60" tile>
+                <v-avatar class="mr-10" color="grey darken-1" size="70" tile>
                   <img
                     :src="require('../../assets/image/Dzoel shop.png')"
                     alt=""
@@ -24,7 +24,7 @@
             </div>
           </v-col>
 
-          <v-col cols="10" md="6">
+          <v-col cols="12" md="6">
             <v-form @submit.prevent="submitSearch">
               <div class="d-flex search_box">
                 <v-spacer></v-spacer>

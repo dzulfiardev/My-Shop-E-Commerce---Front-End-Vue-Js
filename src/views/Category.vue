@@ -23,7 +23,11 @@
     </v-main>
 
     <!-- Bottom navigation -->
-    <BottomNavigation class="hidden-sm-and-up" :loggedIn="loggedIn" />
+    <BottomNavigation
+      class="hidden-sm-and-up"
+      :loggedIn="loggedIn"
+      @loadCategoryProduct="loadCategoryProduct"
+    />
 
     <!-- Footer -->
     <Footer />

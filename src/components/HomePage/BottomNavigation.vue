@@ -10,7 +10,14 @@
       class="d-flex py-2"
     >
       <div>
-        <v-btn value="recent">
+        <v-btn to="/">
+          <span>Home</span>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+      </div>
+
+      <div>
+        <v-btn @click="openCategoryDrawer()">
           <span>Categories</span>
           <v-icon>mdi-shape</v-icon>
         </v-btn>
@@ -29,11 +36,18 @@
 
       <div>
         <v-badge
-          :content="cartCount.length ? cartCount : '0'"
+          v-if="cartCount"
+          :content="cartCount"
           overlap
           color="red"
           align="center"
         >
+          <v-btn @click.stop="drawer = !drawer">
+            <span>Cart</span>
+            <v-icon>mdi-cart-variant</v-icon>
+          </v-btn>
+        </v-badge>
+        <v-badge v-else content="0" overlap color="red" align="center">
           <v-btn @click.stop="drawer = !drawer">
             <span>Cart</span>
             <v-icon>mdi-cart-variant</v-icon>
@@ -75,21 +89,39 @@
       </template>
       <!-- End Cart Items -->
     </v-navigation-drawer>
+    <!-- End Cart Drawer -->
+
+    <!-- Categories Drawer -->
+    <v-navigation-drawer
+      absolute
+      temporary
+      left
+      width="75%"
+      height="100vh"
+      style="position: fixed"
+      v-model="categoryDrawer"
+    >
+      <CategoriesDrawer @showProductCategory="showProductCategory" />
+    </v-navigation-drawer>
+    <!-- End Categories Drawer -->
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import CartDrawer from "../Navbar/CartDrawer.vue";
+import CategoriesDrawer from "../Navbar/CategoriesDrawer.vue";
 
 export default {
   props: ["loggedIn"],
   components: {
     CartDrawer,
+    CategoriesDrawer,
   },
   data() {
     return {
       drawer: null,
+      categoryDrawer: false,
     };
   },
   computed: {
@@ -108,6 +140,12 @@ export default {
     },
     closeDrawer() {
       this.drawer = false;
+    },
+    openCategoryDrawer() {
+      this.categoryDrawer = !this.categoryDrawer;
+    },
+    showProductCategory() {
+      this.$emit("loadCategoryProduct");
     },
   },
 };

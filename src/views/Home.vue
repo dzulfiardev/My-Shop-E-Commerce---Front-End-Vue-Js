@@ -2,8 +2,21 @@
   <v-app>
     <!-- <Navbar :loggedIn="loggedIn" /> -->
     <Navbar2 :loggedIn="loggedIn" />
-    <v-main class="white mt-10">
+    <v-main class="white mt-5">
       <v-container id="scrolling-techniques-7">
+        <v-row class="hidden-md-and-up">
+          <v-col cols="12" align="center">
+            <router-link to="/">
+              <v-avatar class="mr-10" color="grey darken-1" size="100" tile>
+                <img
+                  :src="require('../assets/image/Dzoel shop.png')"
+                  alt=""
+                  link
+                />
+              </v-avatar>
+            </router-link>
+          </v-col>
+        </v-row>
         <v-row>
           <v-col cols="12" md="3" class="hidden-sm-and-down">
             <HomeSidebar />
@@ -21,7 +34,7 @@
     <ProductSection />
 
     <!-- Bottom Navigation -->
-    <BottomNavigation class="hidden-sm-and-up" :loggedIn="loggedIn" />
+    <BottomNavigation class="hidden-md-and-up" :loggedIn="loggedIn" />
 
     <!-- Footer Section -->
     <Footer />

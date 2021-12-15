@@ -143,6 +143,7 @@ export default {
   },
   mounted() {
     this.loadElement();
+    window.scroll(0, 0);
   },
 };
 </script>

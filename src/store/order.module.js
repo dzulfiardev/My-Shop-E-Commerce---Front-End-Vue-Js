@@ -9,7 +9,6 @@ export const order = {
     table: {
       orders: [],
       detailOrder: [],
-      // singleOrder: {},
     },
     tableLoader: "",
     errorUpdate: "",
@@ -49,7 +48,6 @@ export const order = {
       restrictApi
         .post("/deliver-order", form)
         .then((res) => {
-          console.log(res.data);
           alert(res.data.success);
         })
         .catch((err) => {
@@ -65,7 +63,6 @@ export const order = {
         return router.push("/");
       }
       state.order = data;
-      console.log(data.products);
     },
     showOrders(state, data) {
       state.showOrders = data.map((res) => {

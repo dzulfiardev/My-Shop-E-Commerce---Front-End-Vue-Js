@@ -111,14 +111,21 @@
             <!-- End Action Button -->
           </v-data-table>
 
-          <AddProductDialog
-            :addDialog="addDialog"
-            :input="input"
-            :rules="rules"
-            :editorOption="editorOption"
-            @closeDialog="closeDialog"
-            @showDataTable="showDataTable"
-          />
+          <!-- Add Product Dialog -->
+          <v-dialog
+            v-model="addDialog"
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
+          >
+            <AddProductDialog
+              :input="input"
+              :rules="rules"
+              :editorOption="editorOption"
+              @closeDialog="closeDialog"
+              @showDataTable="showDataTable"
+            />
+          </v-dialog>
         </v-card>
       </v-container>
     </v-main>
@@ -229,7 +236,7 @@ export default {
   },
   methods: {
     dialog() {
-      this.addDialog = true;
+      this.addDialog = !this.addDialog;
     },
     closeDialog() {
       this.addDialog = false;

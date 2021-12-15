@@ -1,10 +1,5 @@
 <template>
-  <v-dialog
-    v-model="addDialog"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
-  >
+  <div>
     <v-overlay :value="dialogOverlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
@@ -277,7 +272,7 @@
       </v-form>
       <!-- End Main Form -->
     </v-card>
-  </v-dialog>
+</div>
 </template>
 
 <script>

@@ -182,15 +182,11 @@ export default {
         "tracking_no",
         this.input.trackingNumber ? this.input.trackingNumber : ""
       );
-      form.append(
-        "courier",
-        this.input.courier ? this.input.trackingNumber : ""
-      );
+      form.append("courier", this.input.courier ? this.input.courier : "");
 
       this.$restrictApi
         .post("/deliver-order", form)
         .then((res) => {
-          console.log(res.data);
           this.closeDialog();
           this.$emit("showOrders");
           this.loadingOverlay = false;

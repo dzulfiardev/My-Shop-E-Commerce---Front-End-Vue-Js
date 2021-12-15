@@ -8,7 +8,7 @@
       <v-row align="center">
         <v-col
           cols="12"
-          sm="8"
+          sm="12"
           md="8"
           class="my-10"
           :align="$vuetify.breakpoint.xs ? 'center' : 'left'"
@@ -17,7 +17,7 @@
             class="
               font-weight-bold
               mt-5 mt-sm-2
-              text-body-3 text-sm-h5 text-md-h3 text-lg-h3 text-xl-h3
+              text-body-3 text-sm-h3 text-md-h3 text-lg-h3 text-xl-h3
             "
             v-text="heading2"
             style="letter-spacing: 1.4px !important; line-height: 1.2"
@@ -25,7 +25,7 @@
           ></h1>
 
           <img
-            class="hero_img hidden-sm-and-up"
+            class="hero_img hidden-md-and-up"
             :src="require('../../assets/image/hero_picture.png')"
             alt=""
           />
