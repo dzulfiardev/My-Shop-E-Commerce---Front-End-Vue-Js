@@ -7,7 +7,7 @@
           <v-col cols="12" md="12" min-height="30vh">
             <v-container>
               <v-row class="mt-5">
-                <v-col cols="12" md="6">
+                <v-col cols="12" sm="6" md="6">
                   <v-img
                     contain
                     max-height="350"
@@ -15,7 +15,7 @@
                     :src="product.product_image_url"
                   ></v-img>
                 </v-col>
-                <v-col cols="12" md="6" class="pt-5">
+                <v-col cols="12" sm="6" md="6" class="pt-5">
                   <h1>{{ product.product_name }}</h1>
                   <div class="d-flex mt-5">
                     <p class="grey--text darken-4">Vendor:</p>
