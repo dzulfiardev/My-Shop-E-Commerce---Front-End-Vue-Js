@@ -7,10 +7,10 @@
           contain
           :src="item.image"
           :alt="item.name"
-          style="height: 70px; width: 80px"
+          style="height: 50px; width: 70px"
         />
       </v-col>
-      <v-col cols="6">
+      <v-col cols="5">
         <div style="font-size: 15px">
           <p>
             <b>{{ item.name }}</b>
@@ -20,8 +20,8 @@
           <small>{{ formatCurrency(item.price) }} x {{ item.quantity }}</small>
         </div>
       </v-col>
-      <v-col cols="2">
-        <div>
+      <v-col cols="4">
+        <div class="d-flex flex-row-reverse">
           <p class="red--text" style="font-size: 15px">
             <b>{{ formatCurrency(item.totalPrice) }}</b>
           </p>
@@ -30,7 +30,7 @@
     </v-row>
 
     <v-divider class="my-4"></v-divider>
-    <v-row style="width: 500px !important">
+    <v-row>
       <v-col cols="12" sm="12" md="12">
         <v-row>
           <v-col cols="12" md="8">
@@ -44,9 +44,10 @@
           <v-col cols="12" md="4">
             <v-btn
               color="primary darken-2"
-              class="text-capitalize"
+              class="text-capitalize d-block"
               x-large
               @click="acceptCouponCode"
+              style="margin-top: -30px"
               >Apply</v-btn
             >
           </v-col>
@@ -54,12 +55,12 @@
       </v-col>
     </v-row>
 
-    <v-divider class="mb-4"></v-divider>
-    <v-row style="width: 500px !important">
-      <v-col cols="7">
-        <p style="font-size: 20px">Total</p>
+    <v-divider class="my-4"></v-divider>
+    <v-row>
+      <v-col cols="8">
+        <p style="font-size: 20px" class="mt-1">Total</p>
       </v-col>
-      <v-col cols="5">
+      <v-col cols="4" class="d-flex flex-row-reverse">
         <p>
           <span class="grey--text darken-3--text">USD </span>
           <span style="font-size: 25px">{{ formatCurrency(totalPrice) }}</span>

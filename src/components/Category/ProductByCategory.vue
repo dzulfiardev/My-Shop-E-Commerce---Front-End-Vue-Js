@@ -24,7 +24,10 @@
             max-width="344"
           >
             <router-link :to="'/product-detail/' + product.product_slug">
-              <v-img :src="product.product_image_url" height="200px"></v-img>
+              <v-img
+                :src="product.product_image_url"
+                class="product_image"
+              ></v-img>
             </router-link>
 
             <v-card-title
@@ -34,21 +37,38 @@
               {{ product.product_name }}
             </v-card-title>
 
-            <v-container class="d-flex" style="margin-top: -25px !important">
-              <v-rating
-                :value="4.5"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="13"
-              ></v-rating>
-              <div class="grey--text ms-4 mt-1" style="font-size: 13px">
-                4.5 (413)
-              </div>
+            <v-container style="margin-top: -25px !important">
+              <v-row>
+                <v-col cols="12" md="5">
+                  <v-rating
+                    :value="4.5"
+                    color="amber"
+                    dense
+                    half-increments
+                    readonly
+                    size="13"
+                  ></v-rating>
+                </v-col>
+                <v-col cols="12" md="6" class="hidden-sm-and-down">
+                  <div
+                    class="grey--text ms-4"
+                    style="font-size: 13px; margin-top: 2px"
+                  >
+                    4.5 (413)
+                  </div>
+                </v-col>
+                <v-col cols="12" md="6" class="hidden-sm-and-up">
+                  <div
+                    class="grey--text"
+                    style="font-size: 13px; margin-top: -25px"
+                  >
+                    4.5 (413)
+                  </div>
+                </v-col>
+              </v-row>
             </v-container>
 
-            <div class="d-flex" style="margin-top: -18px">
+            <div class="d-flex" style="margin-top: -25px">
               <v-card-subtitle class="price_title"
                 >${{ product.product_price }}
               </v-card-subtitle>
@@ -83,4 +103,19 @@ export default {
 </script>
 
 <style>
+.product_image {
+  height: 180px;
+}
+
+@media (max-width: 769) {
+  .product_image {
+    height: 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  .product_image {
+    height: 140px;
+  }
+}
 </style>

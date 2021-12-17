@@ -7,7 +7,7 @@
         <v-row class="hidden-md-and-up">
           <v-col cols="12" align="center">
             <router-link to="/">
-              <v-avatar class="mr-10" color="grey darken-1" size="100" tile>
+              <v-avatar color="grey darken-1" size="100" tile>
                 <img
                   :src="require('../assets/image/Dzoel shop.png')"
                   alt=""

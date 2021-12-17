@@ -33,7 +33,7 @@
 <script>
 import FormCheckout from "../components/Checkout/FormCheckout.vue";
 import CartItemsTotal from "../components/Checkout/CartItemsTotal.vue";
-import CartItemsTotalMobile from "../components/Checkout/CartItemsTotal.vue";
+import CartItemsTotalMobile from "../components/Checkout/CartItemsTotalMobile.vue";
 import { mapGetters } from "vuex";
 import { loadStripe } from "@stripe/stripe-js";
 import { api } from "../plugins/axios.js";

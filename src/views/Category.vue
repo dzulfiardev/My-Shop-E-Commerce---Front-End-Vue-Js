@@ -9,6 +9,7 @@
           </v-col>
           <v-col cols="12" md="9" class="categories_section">
             <SkeletonLoader v-if="categoryProductLoader" :loop="8" />
+            <!-- Product card by category -->
             <ProductByCategory
               v-else
               :categoryProduct="categoryProduct"
