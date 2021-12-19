@@ -1,16 +1,16 @@
 import Vue from "vue";
 import axios from "axios";
 
-// const deployUrl = "http://myshopapi.us-east-1.elasticbeanstalk.com/api/";
-const localUrl = "http://127.0.0.1:8000/api/";
+const deployUrl = "http://myshopapi.us-east-1.elasticbeanstalk.com/api/";
+// const localUrl = "http://127.0.0.1:8000/api/";
 
 const api = axios.create({
-  baseURL: localUrl,
+  baseURL: deployUrl,
   withCredentials: true,
 });
 
 const restrictApi = axios.create({
-  baseURL: localUrl,
+  baseURL: deployUrl,
   withCredentials: true,
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
