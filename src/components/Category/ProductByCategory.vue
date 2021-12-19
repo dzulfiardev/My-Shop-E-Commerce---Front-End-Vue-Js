@@ -100,7 +100,7 @@ export default {
 
 <style>
 .product_image {
-  height: 180px;
+  height: 250px;
 }
 
 @media (max-width: 769) {

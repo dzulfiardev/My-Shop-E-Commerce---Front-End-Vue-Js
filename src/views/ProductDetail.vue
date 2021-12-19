@@ -16,7 +16,7 @@
                   ></v-img>
                 </v-col>
                 <v-col cols="12" sm="6" md="6" class="pt-5">
-                  <h1>{{ product.product_name }}</h1>
+                  <h1 class="title_detail">{{ product.product_name }}</h1>
                   <div class="d-flex mt-5">
                     <p class="grey--text darken-4">Vendor:</p>
                     <p class="px-2">
@@ -221,4 +221,9 @@ export default {
 </script>
 
 <style>
+@media (max-width: 600px) {
+  .title_detail {
+    font-size: 24px;
+  }
+}
 </style>

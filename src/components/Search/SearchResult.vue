@@ -16,7 +16,10 @@
             max-width="344"
           >
             <router-link :to="'/product-detail/' + product.product_slug">
-              <v-img :src="product.product_image_url" height="200px"></v-img>
+              <v-img
+                :src="product.product_image_url"
+                class="product_image"
+              ></v-img>
             </router-link>
 
             <v-card-title

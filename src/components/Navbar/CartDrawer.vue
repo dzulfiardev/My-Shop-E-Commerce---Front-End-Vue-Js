@@ -40,11 +40,11 @@
             contain
             :src="item.image"
             :alt="item.name"
-            style="height: 70px; width: 100p%"
+            style="height: 70px; width: 80px"
           />
         </v-col>
         <v-col cols="6" class="px-2">
-          <div class="font_15">
+          <div :class="$vuetify.breakpoint.xs ? 'font_12' : 'font_15'">
             <p>
               <b>{{ item.name }}</b>
             </p>
@@ -97,5 +97,8 @@ export default {
 }
 .font_14 {
   font-size: 14px !important;
+}
+.font_12 {
+  font-size: 12px !important;
 }
 </style>
