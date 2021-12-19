@@ -7,7 +7,7 @@
     <h1 v-else>Search result for: {{ this.$route.params.keyword }}</h1>
     <SkeletonLoader v-if="webSearchLoader" :loop="8" />
     <v-row v-else class="mt-2">
-      <v-col cols="6" md="3" v-for="product in webSearch" :key="product.id">
+      <v-col cols="6" md="4" v-for="product in webSearch" :key="product.id">
         <v-hover v-slot="{ hover }">
           <v-card
             :class="{ 'on-hover': hover }"
@@ -21,24 +21,37 @@
 
             <v-card-title
               class="product_title"
-              style="line-height: 1 !important; font-size: 15px !important"
+              :style="
+                $vuetify.breakpoint.xs
+                  ? 'line-height: 1 !important; font-size: 12px !important'
+                  : 'line-height: 1 !important; font-size: 15px !important'
+              "
             >
               {{ product.product_name }}
             </v-card-title>
 
-            <v-container class="d-flex" style="margin-top: -25px !important">
-              <v-rating
-                :value="4.5"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="13"
-              ></v-rating>
-              <div class="grey--text ms-4 mt-1" style="font-size: 13px">
-                4.5 (413)
-              </div>
-            </v-container>
+            <v-card-text>
+              <v-row align="center" class="mx-0">
+                <v-rating
+                  :value="4.5"
+                  color="amber"
+                  dense
+                  half-increments
+                  readonly
+                  :size="$vuetify.breakpoint.xs ? '13' : '17'"
+                ></v-rating>
+                <div
+                  class="grey--text ms-4"
+                  :style="
+                    $vuetify.breakpoint.xs
+                      ? 'font-size: 12px; margin-left: 1px !important'
+                      : 'font-size: 15px'
+                  "
+                >
+                  4.5 (219)
+                </div>
+              </v-row>
+            </v-card-text>
 
             <div class="d-flex" style="margin-top: -18px">
               <v-card-subtitle class="price_title"

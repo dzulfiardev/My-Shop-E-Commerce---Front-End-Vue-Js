@@ -12,7 +12,7 @@
     <v-row class="mt-2">
       <v-col
         cols="6"
-        md="3"
+        md="4"
         v-for="product in categoryProduct"
         :key="product.id"
       >
@@ -32,43 +32,39 @@
 
             <v-card-title
               class="product_title"
-              style="line-height: 1 !important; font-size: 15px !important"
+              :style="
+                $vuetify.breakpoint.xs
+                  ? 'line-height: 1 !important; font-size: 12px !important'
+                  : 'line-height: 1 !important; font-size: 15px !important'
+              "
             >
               {{ product.product_name }}
             </v-card-title>
 
-            <v-container style="margin-top: -25px !important">
-              <v-row>
-                <v-col cols="12" md="5">
-                  <v-rating
-                    :value="4.5"
-                    color="amber"
-                    dense
-                    half-increments
-                    readonly
-                    size="13"
-                  ></v-rating>
-                </v-col>
-                <v-col cols="12" md="6" class="hidden-sm-and-down">
-                  <div
-                    class="grey--text ms-4"
-                    style="font-size: 13px; margin-top: 2px"
-                  >
-                    4.5 (413)
-                  </div>
-                </v-col>
-                <v-col cols="12" md="6" class="hidden-sm-and-up">
-                  <div
-                    class="grey--text"
-                    style="font-size: 13px; margin-top: -25px"
-                  >
-                    4.5 (413)
-                  </div>
-                </v-col>
+            <v-card-text>
+              <v-row align="center" class="mx-0">
+                <v-rating
+                  :value="4.5"
+                  color="amber"
+                  dense
+                  half-increments
+                  readonly
+                  :size="$vuetify.breakpoint.xs ? '13' : '17'"
+                ></v-rating>
+                <div
+                  class="grey--text ms-4"
+                  :style="
+                    $vuetify.breakpoint.xs
+                      ? 'font-size: 12px; margin-left: 1px !important'
+                      : 'font-size: 15px'
+                  "
+                >
+                  4.5 (219)
+                </div>
               </v-row>
-            </v-container>
+            </v-card-text>
 
-            <div class="d-flex" style="margin-top: -25px">
+            <div class="d-flex" style="margin-top: -15px">
               <v-card-subtitle class="price_title"
                 >${{ product.product_price }}
               </v-card-subtitle>
