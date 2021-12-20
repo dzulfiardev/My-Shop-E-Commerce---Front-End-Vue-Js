@@ -11,9 +11,12 @@ export default {
     };
   },
   created() {
-    const expires = this.loggedIn.expires;
+    let expires = 0;
+    if (this.loggedIn) {
+      expires = this.loggedIn.expires;
+    }
     const exp = expires * 1000;
-    const expSession = exp * 24;
+    const expSession = exp * 12;
 
     if (this.loggedIn) {
       setInterval(() => {
