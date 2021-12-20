@@ -28,7 +28,7 @@
           <span>Account</span>
           <v-icon>mdi-account</v-icon>
         </v-btn> -->
-        <v-btn to="/dashboard" v-if="loggedIn">
+        <v-btn to="/dashboard" v-if="authIn">
           <span>Dashboard</span>
           <v-icon>mdi-view-dashboard</v-icon>
         </v-btn>
@@ -122,6 +122,7 @@ export default {
     return {
       drawer: null,
       categoryDrawer: false,
+      authIn: JSON.parse(localStorage.getItem("loggedIn")),
     };
   },
   computed: {

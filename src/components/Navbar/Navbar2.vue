@@ -57,7 +57,7 @@
 
           <v-col md="3" class="hidden-sm-and-down" align="center">
             <div class="d-flex justify-end pl-5" align="right">
-              <v-tooltip bottom v-if="loggedIn">
+              <v-tooltip bottom v-if="authIn">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     class="mx-2"
