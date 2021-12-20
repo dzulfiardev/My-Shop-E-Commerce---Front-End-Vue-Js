@@ -59,6 +59,9 @@
               :rules="passRules"
               v-model="user.password"
             />
+
+            <small>Email: user@email.com</small><br />
+            <small>Pass: testtest</small><br />
           </v-card-text>
 
           <v-divider></v-divider>
@@ -67,7 +70,7 @@
             <v-btn color="primary" type="submit" :disabled="isValid"
               >Login</v-btn
             >
-            <v-btn color="success" to="/register">Register</v-btn>
+            <v-btn color="success" @click="disableRegister">Register</v-btn>
           </v-card-actions>
         </v-form>
 
@@ -129,6 +132,9 @@ export default {
           this.errMsg = err.response.data.message;
           this.isValid = false;
         });
+    },
+    disableRegister() {
+      alert("This feature is inactive");
     },
   },
   computed: {

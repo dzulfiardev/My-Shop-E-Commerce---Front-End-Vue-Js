@@ -32,13 +32,22 @@
 
           <h1
             class="transition-swing text-body-2 text-md-body-1 mt-10"
-            v-text="heading"
             style="letter-spacing: 2px !important"
             align="left"
-          ></h1>
+          >
+            {{ heading }}
+            <router-link to="/login" style="color: white; font-size: 20px"
+              ><b>Click here to login as the admin</b></router-link
+            >
+          </h1>
 
           <div align="left">
-            <v-btn depressed color="error" class="text-capitalize mt-8">
+            <v-btn
+              depressed
+              color="error"
+              class="text-capitalize mt-8"
+              to="/category/all-products"
+            >
               Shop Now
             </v-btn>
           </div>
@@ -62,7 +71,7 @@ export default {
   data: () => ({
     heading2: "20% Off For First Electronics Purchase",
     heading:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ssit amet, consectetur adipiscing elit",
+      "THIS SITE IS FAKE just for showcase, the website made with Vue.Js 2.6(Front End) & Laravel 8(Back End).",
   }),
 };
 </script>

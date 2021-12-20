@@ -7,7 +7,7 @@ import SearchPage from "../views/SearchPage.vue";
 import CheckOut from "../views/CheckOut.vue";
 import Summary from "../views/Summary.vue";
 import Login from "../views/Auth/Login.vue";
-import Register from "../views/Auth/Register.vue";
+// import Register from "../views/Auth/Register.vue";
 import Dashboard from "../views/Main/Dashboard.vue";
 import Product from "../views/Main/Product.vue";
 import AppSettings from "../views/Main/AppSettings.vue";
@@ -53,11 +53,11 @@ const routes = [
     name: "Login",
     component: Login,
   },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-  },
+  // {
+  //   path: "/register",
+  //   name: "Register",
+  //   component: Register,
+  // },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -70,6 +70,9 @@ const routes = [
     path: "/orders",
     name: "Orders",
     component: Orders,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/product",

@@ -55,7 +55,7 @@ export const auth = {
     },
     userCount({ commit }) {
       restrictApi
-        .get("/users")
+        .get("/users-list/" + 4)
         .then((res) => {
           commit("userCount", res.data.length);
         })

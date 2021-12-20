@@ -57,25 +57,6 @@
 
           <v-col md="3" class="hidden-sm-and-down" align="center">
             <div class="d-flex justify-end pl-5" align="right">
-              <!-- <v-tooltip bottom v-if="!loggedIn">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    class="mx-2"
-                    fab
-                    dark
-                    small
-                    color="primary"
-                    outlined
-                    v-bind="attrs"
-                    v-on="on"
-                    to="/login"
-                  >
-                    <v-icon dark> mdi-account </v-icon>
-                  </v-btn>
-                </template>
-                <span>Login/Register</span>
-              </v-tooltip> -->
-
               <v-tooltip bottom v-if="loggedIn">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
@@ -169,6 +150,7 @@ export default {
     links: ["Login/Register"],
     drawer: null,
     searchKeyword: "",
+    authIn: JSON.parse(localStorage.getItem("loggedIn")),
   }),
   computed: {
     ...mapGetters("cart", {

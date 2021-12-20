@@ -276,6 +276,7 @@ export default {
       dialog: false,
       loading: true,
       singleSelect: false,
+      loggedIn: JSON.parse(localStorage.getItem("loggedIn")),
       selected: [],
       users: [],
       search: "",
@@ -338,7 +339,7 @@ export default {
   methods: {
     allUsers() {
       this.$restrictApi
-        .get("/users")
+        .get("/users-list/" + this.loggedIn.user.id)
         .then((res) => {
           console.log(res);
           this.users = res.data.map(this.getDisplayUsers);
@@ -472,6 +473,9 @@ export default {
       this.image = "";
     },
     save() {
+      if (this.loggedIn.user.role == "user") {
+        return alert("You Cannot run this operate");
+      }
       this.dialogOverlay = true;
       this.resetValidation();
 
