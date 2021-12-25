@@ -16,7 +16,7 @@ export default {
       expires = this.loggedIn.expires;
     }
     const exp = expires * 1000;
-    const expSession = exp * 12;
+    const expSession = exp * 6;
 
     if (this.loggedIn) {
       setInterval(() => {

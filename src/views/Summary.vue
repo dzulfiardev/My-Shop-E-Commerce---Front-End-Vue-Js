@@ -9,6 +9,7 @@
         <h1>Thank you for your Purchase</h1>
         <p>
           Your order will deliver soon, please check your email for the progress
+          (Ignore this message we are not send email for testing)
         </p>
         <v-simple-table
           fixed-header
