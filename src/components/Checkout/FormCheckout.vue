@@ -96,7 +96,7 @@
         </v-col>
       </v-row>
       <v-row style="margin-top: -30px">
-        <v-col cols="12" md="6">
+        <!-- <v-col cols="12" md="6">
           <v-text-field
             label="Zip Postal"
             outlined
@@ -104,17 +104,13 @@
             style="font-size: 14px"
             v-model="input.zipCode"
           ></v-text-field>
-        </v-col>
-        <v-col cols="12" md="6">
+        </v-col> -->
+        <v-col cols="12">
           <v-text-field
             label="Appartement, suite, etc.(optional)"
             outlined
             dense
-            :style="
-              $vuetify.breakpoint.xs
-                ? 'font-size: 14px;margin-top: -30px'
-                : 'font-size: 14px'
-            "
+            style="font-size: 14px"
             v-model="input.appartement"
           ></v-text-field>
         </v-col>
