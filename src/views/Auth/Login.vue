@@ -120,7 +120,7 @@ export default {
           this.overlayProcess = false;
           this.isValid = false;
 
-          this.expiresMs = res.data.expires * 500; // 30 minutes
+          this.expiresMs = res.data.expires * 500; //automated logout in 30 minutes
           const now = new Date();
           let expiresTime = new Date(now.getTime() + this.expiresMs);
 

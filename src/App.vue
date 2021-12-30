@@ -12,6 +12,7 @@ export default {
     };
   },
   created() {
+    // Session Expired Setup
     if (localStorage.getItem("loggedIn")) {
       this.loggedIn = JSON.parse(localStorage.getItem("loggedIn"));
       this.expSession = localStorage.getItem("expSession");
@@ -33,6 +34,7 @@ export default {
         this.$store.dispatch("auth/login", authData);
       }
     }
+    // End Session expired setup
   },
 };
 </script>
