@@ -558,8 +558,4 @@ export default {
 </script>
 
 <style>
-.swal2-popup {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.1rem;
-}
 </style>
