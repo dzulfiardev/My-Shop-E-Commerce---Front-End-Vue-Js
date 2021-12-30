@@ -7,13 +7,15 @@
 
     <v-navigation-drawer v-model="drawer" app>
       <v-card class="pa-3" color="primary" tile>
-        <v-avatar class="mr-10" color="grey darken-1" size="70" tile>
-          <img
-            :src="require('../../assets/image/Dzoel shop.png')"
-            alt=""
-            link
-          />
-        </v-avatar>
+        <router-link to="/">
+          <v-avatar class="mr-10" color="grey darken-1" size="70" tile>
+            <img
+              :src="require('../../assets/image/Dzoel shop.png')"
+              alt=""
+              link
+            />
+          </v-avatar>
+        </router-link>
       </v-card>
 
       <v-list>

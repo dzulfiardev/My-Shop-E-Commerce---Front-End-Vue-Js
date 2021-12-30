@@ -46,11 +46,15 @@ export const auth = {
     successMsg({ commit }, msg) {
       commit("registerSuccess", msg);
     },
-    login({ commit }, data) {
-      commit("currentUser", data);
+    login({ commit }, authData) {
+      setTimeout(() => {
+        commit("logoutExpired");
+      }, authData.expiresMs);
+      commit("currentUser", authData.user);
     },
     logout({ commit }) {
       localStorage.removeItem("loggedIn");
+      localStorage.removeItem("expSession");
       commit("deleteCurrentUser");
     },
     userCount({ commit }) {
@@ -76,6 +80,11 @@ export const auth = {
     },
   },
   mutations: {
+    logoutExpired(state) {
+      state.user = null;
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("expSession");
+    },
     registerSuccess(state, data) {
       state.status.loggedIn = false;
       state.registerMsg = data;

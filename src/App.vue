@@ -7,21 +7,31 @@ export default {
   name: "App",
   data() {
     return {
-      loggedIn: JSON.parse(localStorage.getItem("loggedIn")),
+      loggedIn: null,
+      expSession: null,
     };
   },
   created() {
-    let expires = 0;
-    if (this.loggedIn) {
-      expires = this.loggedIn.expires;
+    if (localStorage.getItem("loggedIn")) {
+      this.loggedIn = JSON.parse(localStorage.getItem("loggedIn"));
+      this.expSession = localStorage.getItem("expSession");
     }
-    const exp = expires * 1000;
-    const expSession = exp * 6;
+    if (this.loggedIn && this.expSession) {
+      let expiresMs = new Date(this.expSession);
+      let now = new Date();
+      now = now.getTime();
 
-    if (this.loggedIn) {
-      setInterval(() => {
+      const expires = expiresMs.getTime();
+
+      if (now > expiresMs) {
         this.$store.dispatch("auth/logout");
-      }, expSession);
+      } else {
+        const authData = {
+          user: this.loggedIn.user,
+          expiresMs: expires - now,
+        };
+        this.$store.dispatch("auth/login", authData);
+      }
     }
   },
 };

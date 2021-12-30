@@ -74,16 +74,22 @@
             </template>
             <!-- End Action Button -->
           </v-data-table>
-          <OrdersDialog
-            :orderDialog="orderDialog"
-            :orderId="orderId"
-            :orderTransactionId="input.orderTransactionId"
-            :input="input"
-            :rules="rules"
-            @closeDialog="closeDialog"
-            @showOrders="showOrders"
-            :orderDetail="orderDetail"
-          />
+          <v-dialog
+            transition="dialog-bottom-transition"
+            max-width="900"
+            v-model="orderDialog"
+          >
+            <OrdersDialog
+              :orderDialog="orderDialog"
+              :orderId="orderId"
+              :orderTransactionId="input.orderTransactionId"
+              :input="input"
+              :rules="rules"
+              @closeDialog="closeDialog"
+              @showOrders="showOrders"
+              :orderDetail="orderDetail"
+            />
+          </v-dialog>
         </v-card>
       </v-container>
     </v-main>

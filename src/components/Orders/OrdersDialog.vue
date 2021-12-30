@@ -1,9 +1,5 @@
 <template>
-  <v-dialog
-    transition="dialog-bottom-transition"
-    max-width="900"
-    v-model="orderDialog"
-  >
+<div>
     <v-overlay :value="loadingOverlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
@@ -147,7 +143,7 @@
         <v-btn dark @click="closeDialog">Close</v-btn>
       </v-card-actions>
     </v-card>
-  </v-dialog>
+</div>
 </template>
 
 <script>
@@ -155,7 +151,7 @@ import Swal from "sweetalert2";
 
 export default {
   props: [
-    "orderDialog",
+    // "orderDialog",
     "orderDetail",
     "orderTransactionId",
     "input",

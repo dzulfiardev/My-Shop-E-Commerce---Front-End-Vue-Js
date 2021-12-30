@@ -59,9 +59,6 @@
               :rules="passRules"
               v-model="user.password"
             />
-
-            <small>Email: user@email.com</small><br />
-            <small>Pass: testtest</small><br />
           </v-card-text>
 
           <v-divider></v-divider>
@@ -96,13 +93,14 @@ export default {
       overlayProcess: false,
       viewPass: false,
       user: {
-        email: "",
-        password: "",
+        email: "user@email.com",
+        password: "testtest",
       },
       emailRules: [(v) => !!v || "E-mail is required"],
       passRules: [(v) => !!v || "Password is required"],
       isValid: false,
       errMsg: "",
+      expiresMs: null,
     };
   },
   methods: {
@@ -122,8 +120,19 @@ export default {
           this.overlayProcess = false;
           this.isValid = false;
 
+          this.expiresMs = res.data.expires * 500; // 30 minutes
+          const now = new Date();
+          let expiresTime = new Date(now.getTime() + this.expiresMs);
+
+          const authData = {
+            user: res.data.user,
+            expiresMs: this.expiresMs,
+          };
+
           localStorage.setItem("loggedIn", JSON.stringify(res.data));
-          this.$store.dispatch("auth/login", res.data.user);
+          localStorage.setItem("expSession", expiresTime);
+
+          this.$store.dispatch("auth/login", authData);
           this.$router.push("/dashboard");
         })
         .catch((err) => {
