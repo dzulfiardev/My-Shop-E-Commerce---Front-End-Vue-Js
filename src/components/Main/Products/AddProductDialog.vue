@@ -272,7 +272,7 @@
       </v-form>
       <!-- End Main Form -->
     </v-card>
-</div>
+  </div>
 </template>
 
 <script>
@@ -373,7 +373,6 @@ export default {
         .catch((err) => {
           this.dialogOverlay = false;
           console.log(err.response.data);
-          alert(err.response.data.message);
           const error = err.response.data.error;
           if (error) {
             this.$refs.form.validate(true);
@@ -410,5 +409,9 @@ export default {
 <style>
 .margin-field {
   margin-top: -40px;
+}
+.swal2-popup {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
 }
 </style>
