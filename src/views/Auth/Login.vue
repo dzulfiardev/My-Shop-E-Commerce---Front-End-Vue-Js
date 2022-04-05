@@ -85,6 +85,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+
 export default {
   title: "Login - My Shop",
   data() {
@@ -110,13 +111,13 @@ export default {
     handleLogin() {
       this.overlayProcess = true;
       this.isValid = true;
+
       this.$api
         .post("login", {
           email: this.user.email,
           password: this.user.password,
         })
         .then((res) => {
-          console.log(res);
           this.overlayProcess = false;
           this.isValid = false;
 
