@@ -1,7 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
 
-const deployUrl = process.env.PRODUCTION_API_URL;
+const deployUrl = process.env.VUE_APP_URL;
 
 const api = axios.create({
   baseURL: deployUrl,
