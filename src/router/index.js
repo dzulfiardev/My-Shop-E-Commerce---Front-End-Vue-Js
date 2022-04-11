@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import NotFoundPage from "../views/NotFoundPage.vue";
 import ProductDetail from "../views/ProductDetail.vue";
 import Category from "../views/Category.vue";
 import SearchPage from "../views/SearchPage.vue";
@@ -105,6 +106,11 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: "/:catchAll(.*)",
+    component: NotFoundPage,
+    name: "NotFound",
   },
 ];
 
