@@ -11,8 +11,8 @@
                   <v-img
                     contain
                     max-height="350"
-                    :lazy-src="product.product_image_url"
-                    :src="product.product_image_url"
+                    :lazy-src="imageUrl + product.product_image"
+                    :src="imageUrl + product.product_image"
                   ></v-img>
                 </v-col>
                 <v-col cols="12" sm="6" md="6" class="pt-5">
@@ -147,6 +147,7 @@ export default {
   },
   data() {
     return {
+      imageUrl: process.env.VUE_APP_ASSET_PRODUCT_IMG_URL,
       isValid: false,
       product: "",
       getProduct: {},

@@ -11,7 +11,7 @@
         >
           <router-link :to="'/product-detail/' + product.product_slug">
             <v-img
-              :src="product.product_image_url"
+              :src="imageUrl + product.product_image"
               class="product_image_home"
             ></v-img>
           </router-link>
@@ -72,6 +72,11 @@
 <script>
 export default {
   props: ["products"],
+  data() {
+    return {
+      imageUrl: process.env.VUE_APP_ASSET_PRODUCT_IMG_URL,
+    };
+  },
 };
 </script>
 

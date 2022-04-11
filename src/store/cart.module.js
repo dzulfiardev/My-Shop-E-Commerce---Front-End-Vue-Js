@@ -33,7 +33,9 @@ export const cart = {
           const items = {
             id: res.data.id,
             name: res.data.product_name,
-            image: res.data.product_image_url,
+            image:
+              process.env.VUE_APP_ASSET_PRODUCT_IMG_URL +
+              res.data.product_image,
             price: res.data.product_price,
             quantity: payload.cartQty,
             totalPrice: totalPrice,

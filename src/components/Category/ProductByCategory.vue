@@ -25,7 +25,7 @@
           >
             <router-link :to="'/product-detail/' + product.product_slug">
               <v-img
-                :src="product.product_image_url"
+                :src="imageUrl + product.product_image"
                 class="product_image"
               ></v-img>
             </router-link>
@@ -93,7 +93,9 @@ export default {
     "headingProgress",
   ],
   data() {
-    return {};
+    return {
+      imageUrl: process.env.VUE_APP_ASSET_PRODUCT_IMG_URL,
+    };
   },
 };
 </script>

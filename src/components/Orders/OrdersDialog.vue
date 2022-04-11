@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
     <v-overlay :value="loadingOverlay">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
@@ -29,7 +29,7 @@
                     <v-col cols="12" md="3">
                       <img
                         contain
-                        :src="detail.product_image_url"
+                        :src="imageUrl + detail.product_image"
                         :alt="detail.product_name"
                         class="my-2"
                         style="height: 70px; width: 80px"
@@ -143,7 +143,7 @@
         <v-btn dark @click="closeDialog">Close</v-btn>
       </v-card-actions>
     </v-card>
-</div>
+  </div>
 </template>
 
 <script>
@@ -160,6 +160,7 @@ export default {
   ],
   data() {
     return {
+      imageUrl: process.env.VUE_APP_ASSET_PRODUCT_IMG_URL,
       loadingOverlay: false,
     };
   },

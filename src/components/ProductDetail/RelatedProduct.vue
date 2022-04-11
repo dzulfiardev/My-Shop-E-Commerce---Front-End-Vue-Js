@@ -14,7 +14,7 @@
             style="height: fit-content !important; padding-bottom: 0 !important"
           >
             <v-img
-              :src="product.product_image_url"
+              :src="imageUrl + product.product_image"
               height="200px"
               style="cursor: pointer"
               @click="getProduct(product.product_slug)"
@@ -66,6 +66,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      imageUrl: process.env.VUE_APP_ASSET_PRODUCT_IMG_URL,
       model: null,
     };
   },

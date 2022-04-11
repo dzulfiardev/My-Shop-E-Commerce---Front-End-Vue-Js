@@ -262,7 +262,8 @@ export default {
               id: data.id,
               categoryId: data.category_id,
               uid: data.product_uid,
-              image: data.product_image_url,
+              image:
+                process.env.VUE_APP_ASSET_PRODUCT_IMG_URL + data.product_image,
               product: data.product_name,
               status: data.product_status,
               quantity: data.product_quantity,
@@ -304,7 +305,8 @@ export default {
           this.input.description = res.data.product_content;
           this.input.price = res.data.product_price;
           this.input.discount = res.data.product_discount;
-          this.input.imageProduct = res.data.product_image_url;
+          this.input.imageProduct =
+            process.env.VUE_APP_ASSET_PRODUCT_IMG_URL + res.data.product_image;
           this.input.oldImage = res.data.product_image;
           this.input.quantity = res.data.product_quantity;
           this.input.barcode = res.data.product_barcode;

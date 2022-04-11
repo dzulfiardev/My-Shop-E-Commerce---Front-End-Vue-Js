@@ -364,7 +364,7 @@ export default {
       return {
         id: data.user_id,
         uid: data.user_uid,
-        image: data.user_image_url,
+        image: process.env.VUE_APP_ASSET_PROFILE_IMG_URL + data.user_image,
         email: data.email,
         username: data.user_username,
         fullname: data.user_fullname,
@@ -412,7 +412,8 @@ export default {
           this.editedItem.fullname = res.data.user_fullname;
           this.editedItem.statusValue = res.data.user_status;
           this.editedItem.roleValue = res.data.id;
-          this.image = res.data.user_image_url;
+          this.image =
+            process.env.VUE_APP_ASSET_PROFILE_IMG_URL + res.data.user_image;
           this.editedItem.oldImage = res.data.user_image;
           this.dialogOverlay = false;
         })
